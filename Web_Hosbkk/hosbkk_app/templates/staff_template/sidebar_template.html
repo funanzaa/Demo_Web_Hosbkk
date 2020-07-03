@@ -1,41 +1,40 @@
 {% load static %}
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <!-- Brand Logo -->
-  <a href="" class="brand-link">
-    <img src=" {% static "dist/img/Logo.png" %}" alt="" class="brand-image img-circle elevation-3"
-      style="opacity: .8">
-    <span class="brand-text font-weight-light">Hospital-OS</span>
-  </a>
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="../../index3.html" class="brand-link">
+      <img src="{% static "dist/img/Logo.png" %} "
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static "dist/img/user2-160x160.jpg"%} " class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ user.first_name }} {{ user.last_name }}</a>
+        </div>
+      </div>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{% static "dist/img/user2-160x160.jpg" %} " class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a href="#" class="d-block">{{ user.username }}</a>
-      </div>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-header">ADD</li>
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <p>
+                Cases
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!--     add     -->
-        <li class="nav-header">&nbsp;&nbsp;ADD</li>
-        <li class="nav-item">
-           {% url 'student_home' as student_home %}
-          <a href="{{ student_home }}" class="nav-link {% if request.path == student_home %} active {% endif %}">
-            <i class="fas fa-user-plus"></i>
-            <p>
-              &nbsp;Home
-            </p>
-          </a>
-        </li>
-
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
-  <!-- /.sidebar -->
-</aside>
+    <!-- /.sidebar -->
+  </aside>

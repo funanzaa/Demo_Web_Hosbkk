@@ -10,7 +10,7 @@ def HomePage(request):
     return render(request, 'home.html')
 
 def Login(request):
-    return render(request, 'staff_template/login.html')
+    return render(request, 'login.html')
 
 def doLogin(request):
     if request.method != "POST":
@@ -25,9 +25,13 @@ def doLogin(request):
             #     return HttpResponseRedirect(reverse("staff_home"))
             # else:
             #     return HttpResponseRedirect(reverse("student_home"))
-            return HttpResponse("username : " + user.username + " Password : " + user.password)
+            return HttpResponseRedirect(reverse("staff_home"))
+            # return HttpResponse("username : " + user.username + " Password : " + user.password)
         else:
             messages.error(request, "Invalid Login Details")
             return HttpResponseRedirect(reverse("login-page"))
 
     return HttpResponseRedirect(reverse("login-page"))
+
+def staff_home(request):
+    return render(request, 'staff_template/staff_home_template.html')
