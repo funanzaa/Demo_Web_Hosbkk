@@ -1,9 +1,11 @@
 from django.contrib import messages
+from hosbkk_app.models import *
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from hosbkk_app.EmailBackEnd import EmailBackEnd
 from django.urls import reverse
+
 
 
 def HomePage(request):
@@ -35,3 +37,9 @@ def doLogin(request):
 
 def staff_home(request):
     return render(request, 'staff_template/staff_home_template.html')
+
+def staff_add_case(request):
+    status = Status.objects.all()
+    service = Service.objects.all()
+    
+    return render(request, 'staff_template/add_case_template.html', {"Status": status,"services": service})

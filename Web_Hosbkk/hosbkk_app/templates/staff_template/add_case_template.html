@@ -1,0 +1,111 @@
+{% extends 'staff_template/base_template.html' %}
+{% block main_content %}
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Add Cases</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Project Add</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <form role="form" action="" method="POST">
+    {% csrf_token %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputClientCompany">Status :</label>
+                <select class="form-control custom-select">
+                  {% for Status_ in Status %}
+                  <option value="{{ Status_.id }}">{{ Status_.name }} </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputName"> Program Name </label>
+                <input type="text" id="inputName" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputName"> เรื่อง </label>
+                <input type="text" id="inputName" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Case Description</label>
+                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-md-6">
+          <div class="card card-secondary">
+
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputEstimatedBudget">Assigned to: </label>
+                <select class="form-control custom-select">
+                  <option selected="" disabled="">Select one</option>
+                  <option>On Hold</option>
+                  <option>Canceled</option>
+                  <option>Success</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget">Account Name: *</label>
+                <select class="form-control custom-select">
+                  <option selected="" disabled="">Select one</option>
+                  <option>On Hold</option>
+                  <option>Canceled</option>
+                  <option>Success</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget">ช่องทางติดต่อ: </label>
+                <select class="form-control custom-select"  name="service">
+                  {% for service in services %}
+                  <option value="{{ service.id }}">{{ service.name }} </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget"> Subgroup : </label>
+                <select class="form-control custom-select">
+                  <option selected="" disabled="">Select one</option>
+                  <option>On Hold</option>
+                  <option>Canceled</option>
+                  <option>Success</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Resolution:</label>
+                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="Save" class="btn btn-success float-right">
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </form>
+</section>
+{% endblock main_content %}
