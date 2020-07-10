@@ -4,7 +4,7 @@ Add Case
 {% endblock page_title %}
 {% block main_content %}
 <section class="content">
-  <form role="form" action="{% url 'case_save' %}" method="POST">
+  <form role="form" action="/case_save" method="POST">
     {% csrf_token %}
     <div class="container-fluid">
       <div class="row">
@@ -22,6 +22,8 @@ Add Case
               <div class="form-group">
                 <label for="inputName"> เรื่อง </label>
                 <input type="text" id="inputName" class="form-control" required name= "case_name">
+                <!-- hidden staff.admin.id -->
+                <input type="hidden" name="user_id" value="{{ user.id }}">
               </div>
               <div class="form-group">
                 <label for="inputDescription">Case Description</label>
