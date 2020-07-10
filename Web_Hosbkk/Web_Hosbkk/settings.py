@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hosbkk_app'
+    'hosbkk_app',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'Web_Hosbkk.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'web_hos',
+        'NAME': 'crm_hos',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',

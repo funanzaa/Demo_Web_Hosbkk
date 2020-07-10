@@ -11,12 +11,12 @@ class Project(models.Model):
 
 class Project_subgroup(models.Model):
     name = models.CharField(max_length=255)
-    project_id = models.ForeignKey(Project, on_delete=models.DO_NOTHING)
+    # project_id = models.ForeignKey(Project, on_delete=models.DO_NOTHING)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.name + " : " + str(self.project_id)
+        return self.name 
 
 class Hospitals(models.Model):
     code = models.CharField(max_length=255)
@@ -48,6 +48,7 @@ class Case(models.Model):
     name = models.CharField(max_length=255)
     modified_user_id = models.CharField(max_length=255)
     project_subgroup_id = models.ForeignKey(Project_subgroup, on_delete=models.DO_NOTHING)
+    project_id = models.ForeignKey(Project, on_delete=models.DO_NOTHING)
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     assigned_user_id = models.CharField(max_length=255)
     status = models.ForeignKey(Status, on_delete=models.DO_NOTHING)
@@ -58,4 +59,6 @@ class Case(models.Model):
     date_entered = models.DateTimeField(auto_now_add=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now_add=True)
-    object = models.Manager()
+
+    def __str__(self):
+        return str(self.id) + ' | '+ self.name

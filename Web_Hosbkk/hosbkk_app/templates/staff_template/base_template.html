@@ -24,6 +24,17 @@
 {% include 'staff_template/sidebar_template.html' with user=user id=id%}
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">
+                {% block page_title %}{% endblock page_title %}
+            </h1>
+          </div><!-- /.col -->
+        </div>
+      </div>
+    </div>
     <!-- Main content -->
     {% block main_content %} {% endblock main_content %}
     <!-- /.content -->
