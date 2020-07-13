@@ -3,7 +3,7 @@ from django.contrib import messages
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from hosbkk_app.EmailBackEnd import EmailBackEnd
 from django.urls import reverse
 from .filter import HospitalsFilter
@@ -69,25 +69,22 @@ def case_save(request):
         subgroup = request.POST.get("subgroup")
         status = request.POST.get("status")
         user_id = request.POST.get("user_id")
-        try:
-            new_case = Case()
-            new_case.name = case_name
-            new_case.modified_user_id = 'user_id'
-            new_case.assigned_user_id = assigned_user
-            new_case.description = case_desc
-            new_case.resolution = case_res
-            new_case.date_entered = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            new_case.create_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            new_case.update_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            new_case.created_by_id = user_id
-            new_case.hospitals_id_id = hospital
-            new_case.project_id_id = project
-            new_case.project_subgroup_id_id = subgroup
-            new_case.service_id_id = service
-            new_case.status_id = status
-            new_case.save()
-            print("test")
-        except:
-            messages.error(request, "Failed Add Staff")
-            return HttpResponseRedirect(reverse("staff_add_case"))
+        new_case = Case()
+        new_case.name = case_name
+        new_case.modified_user_id = user_id
+        new_case.assigned_user_id = assigned_user
+        new_case.description = case_desc
+        new_case.resolution = case_res
+        new_case.date_entered = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        new_case.create_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        new_case.update_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        new_case.created_by_id = user_id
+        new_case.hospitals_id_id = hospital
+        new_case.project_id_id = project
+        new_case.project_subgroup_id_id = subgroup
+        new_case.service_id_id = service
+        new_case.status_id = status
+        new_case.save()
+        return HttpResponseRedirect(reverse("staff_home"))
+
 
