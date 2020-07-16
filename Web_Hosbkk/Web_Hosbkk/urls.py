@@ -22,4 +22,5 @@ from hosbkk_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('hosbkk_app.urls')),
+    path('logout_user', views.logout_user, name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

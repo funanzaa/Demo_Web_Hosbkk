@@ -19,6 +19,10 @@ def HomePage(request):
 def Login(request):
     return render(request, 'login.html')
 
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("home-page"))
+
 def doLogin(request):
     if request.method != "POST":
         return HttpResponse("<h2> Method Not Allowed </h2>")
@@ -39,9 +43,7 @@ def staff_home(request):
     penging_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=4).count()
     close_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=3).count()
     all_cases = Case.objects.filter(created_by_id=current_user).order_by('-create_at')
-    print(current_user)
     context = {"all_case" :all_cases,"sum_case":sum_cases,"new_case": new_cases,"penging_case": penging_cases,"close_case":close_cases}
-    print(context)
     return render(request, 'staff_template/staff_home_template.html', context)
 
 @csrf_exempt #  we don't need to Pass csrf_token
