@@ -8,6 +8,8 @@ from hosbkk_app.EmailBackEnd import EmailBackEnd
 from django.urls import reverse
 from .filter import HospitalsFilter
 from datetime import datetime
+from .search_hosp import *
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -23,36 +25,51 @@ def doLogin(request):
     else:
         user =EmailBackEnd.authenticate(request, username=request.POST.get("username"), password=request.POST.get("password"))
         if user != None:
-            login(request, user)
-            # if user.user_type == "1":
-            #     return HttpResponseRedirect('/admin_home')
-            # elif user.user_type == "2":
-            #     return HttpResponseRedirect(reverse("staff_home"))
-            # else:
-            #     return HttpResponseRedirect(reverse("student_home"))
-            return HttpResponseRedirect(reverse("staff_home"))
-            # return HttpResponse("username : " + user.username + " Password : " + user.password)
+             login(request, user)
+             return HttpResponseRedirect(reverse("staff_home"))
         else:
             messages.error(request, "Invalid Login Details")
             return HttpResponseRedirect(reverse("login-page"))
-
     return HttpResponseRedirect(reverse("login-page"))
 
 def staff_home(request):
-    return render(request, 'staff_template/staff_home_template.html')
+    current_user = request.user.id
+    sum_cases = Case.objects.filter(created_by_id=current_user).count()
+    new_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=2).count()
+    penging_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=4).count()
+    close_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=3).count()
+    all_cases = Case.objects.filter(created_by_id=current_user).order_by('-create_at')
+    print(current_user)
+    context = {"all_case" :all_cases,"sum_case":sum_cases,"new_case": new_cases,"penging_case": penging_cases,"close_case":close_cases}
+    print(context)
+    return render(request, 'staff_template/staff_home_template.html', context)
+
+@csrf_exempt #  we don't need to Pass csrf_token
 
 def staff_add_case(request):
 
+    hospital={}
     user  = User.objects.filter(id__gt=1)
-    hospital = Hospitals.objects.order_by('code')
+    # hospital = Hospitals.objects.order_by('code')
     project = Project.objects.all()
     status = Status.objects.all()
     service = Service.objects.all()
     subgroup = Project_subgroup.objects.all()
-
-
-    context = {"status_": status,"services" : service, "projects" : project, "users" : user, "hospitals":hospital , "subgroups" : subgroup}
     
+    if request.method == "POST":
+        # global hospital
+        code = request.POST.get("name")
+        print("POST" + code)
+        hospital = Hospitals.objects.filter(label__icontains=code)|Hospitals.objects.filter(code__icontains=code)
+        context = {"hospitals" : hospital}
+        print(context)
+        return render(request, 'staff_template/add_case_template.html', context )
+        # print(hospital)
+        # return hospital
+    # print(hospital)
+    # print(status)
+    context = {"status_": status,"services" : service, "projects" : project, "users" : user, "hospitals":hospital , "subgroups" : subgroup}
+    print(context)
     return render(request, 'staff_template/add_case_template.html', context)
 
 def case_save(request):
@@ -87,4 +104,13 @@ def case_save(request):
         new_case.save()
         return HttpResponseRedirect(reverse("staff_home"))
 
+def search_hosp(request):
+    
+    if request.method == "POST":
+        search = request.POST.get("search")
+        # print(search)
+        search_hosp(search)
 
+    hospital = Hospitals.objects.order_by('code')
+    context = {"hospitals" : hospital}
+    return render(request, 'staff_template/form.html', context)

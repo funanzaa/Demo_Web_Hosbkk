@@ -10,4 +10,5 @@ urlpatterns = [
     path('staff_home', staff_home, name= 'staff_home'),
     path('staff_add_case', staff_add_case, name= 'staff_add_case'),
     path('case_save', case_save, name= 'case_save'),
+    path('search_hosp', search_hosp, name ='search_hosp'),
 ]

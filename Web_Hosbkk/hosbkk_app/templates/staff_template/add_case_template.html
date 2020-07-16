@@ -4,7 +4,7 @@ Add Case
 {% endblock page_title %}
 {% block main_content %}
 <section class="content">
-  <form role="form" action="/case_save" method="POST">
+  <form role="form" action="/case_save" method="POST"> 
     {% csrf_token %}
     <div class="container-fluid">
       <div class="row">
@@ -55,16 +55,20 @@ Add Case
                   {% endfor %}
                 </select>
               </div>
-              <div class="form-group">
+               <div class="form-group">
                 <div class="input-group input-group">
-                  <input type="text" class="form-control" placeholder="Account Name">
+                    <input type="text" class="form-control" placeholder="Account Name" value="">
                   <span class="input-group-append">
-                    <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target="#myModal">Search!</button>
+                    {% comment %} <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target="#myModal">Search!</button> {% endcomment %}
                     <!-- Button trigger modal -->
-                    {% comment %} <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target=".bs-example-modal-lg">Search!</button> {% endcomment %}
+                    <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target="#search_hop">
+                      Search!
+                    </button>
+                    {% comment %} <button id = "one" type="button" class="btn btn-info btn-flat">Search!</button> {% endcomment %}
+                    <!-- Button trigger modal -->
                   </span>
                 </div>
-              </div>
+              </div> 
               <div class="form-group">
                 <label for="inputSpentBudget">ช่องทางติดต่อ: </label>
                 <select class="form-control custom-select" name="service">
@@ -97,7 +101,7 @@ Add Case
     <div class="row">
       <div class="col-12">
         <a href="#" class="btn btn-secondary">Cancel</a>
-        <input type="submit" value="Save" class="btn btn-success float-right">
+        <input type="submit" value="Save" form = 'case_save' class="btn btn-success float-right">
       </div>
     </div>
     </div>
@@ -105,5 +109,5 @@ Add Case
   </form>
   <!-- Modal -->
   {% include 'staff_template/model.html' with user=user id=id%}
-  {% endblock main_content %}
 </section>
+{% endblock main_content %}

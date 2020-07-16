@@ -1,138 +1,197 @@
 {% extends 'staff_template/base_template.html' %}
 {% block page_title %}
-Dashboard 
+Dashboard
 {% endblock page_title %}
 {% block main_content %}
 <section class="content">
-    <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>150</h3>
+  <div class="container-fluid">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{sum_case}}</h3>
 
-                        <p>New Orders</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                        <p>Bounce Rate</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3>44</h3>
-
-                        <p>User Registrations</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-person-add"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3>65</h3>
-                        <p>Unique Visitors</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
+            <p>All Case</p>
+          </div>
+          <div class="icon">
+            <i class="ion-connection-bars"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
-        <div class="row">
-        <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Responsive Hover Table</h3>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{new_case}}<sup style="font-size: 20px"></sup></h3>
 
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+            <p>New</p>
+          </div>
+          <div class="icon">
 
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
+            <i class="ion ion-person-add"></i>
+          </div>
+          <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{penging_case}}</h3>
+
+            <p>Penging input</p>
+          </div>
+          <div class="icon">
+               <i class="ion ion-stats-bars"></i> 
+          </div>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{close_case}}</h3>
+            <p>Close</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-pie-graph"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Responsive Hover Table</h3>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                 </div>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+            </div>
+          </div>
+          <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Case</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body p-0">
+                <table class="table table-striped projects">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
+                      <th>
+                        ID
+                      </th>
+                      <th style="width: 20%">
+                        Case Name
+                      </th>
+                      <th style="width: 10%">
+                        Subgroup 
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                        Status
+                      </th>
+                       <th style="width: 20%">
+                        Project Name
+                      </th>
+                      <th>
+                        Hospital
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
+                  {% for case in all_case %}
                     <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>219</td>
-                      <td>Alexander Pierce</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-warning">Pending</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>657</td>
-                      <td>Bob Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-primary">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>175</td>
-                      <td>Mike Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-danger">Denied</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
+                      <td>
+                        {{case.id}}
+                      </td>
+                      <td>
+                        <a>
+                          {{case.name}}
+                        </a>
+                        <br>
+                        <small>
+                          {{case.date_entered}}
+                        </small>
+                      </td>
+                      <td class="project_progress">
+                          {{case.project_subgroup.name}}
+                      </td>
+                      {% if case.status.name == 'Close' %}
+                      <td class="project-state">
+                        <span class="badge badge-danger">{{case.status.name}}</span>
+                      </td>
+                      {% elif case.status.name == 'New'  %}
+                      <td class="project-state">
+                        <span class="badge badge-success">{{case.status.name}}</span>
+                      </td>
+                      {% elif case.status.name == 'Penging input'  %}
+                      <td class="project-state">
+                        <span class="badge badge-warning">{{case.status.name}}</span>
+                      </td>
+                      {% endif %}
+                       <td>
+                         {{case.project.name}}
+                      </td>
+                      <td>
+                         {{case.hospitals.label}}
+                      </td>
+                      <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" href="#">
+                          <i class="fas fa-folder">
+                          </i>
+                          View
+                        </a>
+                        <a class="btn btn-info btn-sm" href="#">
+                          <i class="fas fa-pencil-alt">
+                          </i>
+                          Edit
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="#">
+                          <i class="fas fa-trash">
+                          </i>
+                          Delete
+                        </a>
+                      </td>
+                  {% endfor %}
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-          </div>
+
+          </section>
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+        <!-- /.card -->
+      </div>
+    </div>
+    <!-- /.row (main row) -->
+  </div><!-- /.container-fluid -->
 </section>
 {% endblock main_content %}
