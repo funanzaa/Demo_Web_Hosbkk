@@ -9,8 +9,8 @@ from django.urls import reverse
 from .filter import HospitalsFilter
 from datetime import datetime
 from .search_hosp import *
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-
 
 
 def HomePage(request):
@@ -36,7 +36,9 @@ def doLogin(request):
             return HttpResponseRedirect(reverse("login-page"))
     return HttpResponseRedirect(reverse("login-page"))
 
+@login_required
 def staff_home(request):
+
     current_user = request.user.id
     sum_cases = Case.objects.filter(created_by_id=current_user).count()
     new_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=2).count()
@@ -47,11 +49,14 @@ def staff_home(request):
     return render(request, 'staff_template/staff_home_template.html', context)
 
 @csrf_exempt #  we don't need to Pass csrf_token
-
+@login_required
 def staff_add_case(request):
 
+    current_user = request.user.id
     hospital={}
-    user  = User.objects.filter(id__gt=1)
+    print(current_user)
+    # user  = User.objects.filter(id__gt=1)
+    user  = User.objects.filter(id__exact=current_user)
     # hospital = Hospitals.objects.order_by('code')
     project = Project.objects.all()
     status = Status.objects.all()
@@ -59,19 +64,12 @@ def staff_add_case(request):
     subgroup = Project_subgroup.objects.all()
     
     if request.method == "POST":
-        # global hospital
+
         code = request.POST.get("name")
-        print("POST" + code)
         hospital = Hospitals.objects.filter(label__icontains=code)|Hospitals.objects.filter(code__icontains=code)
         context = {"hospitals" : hospital}
-        print(context)
         return render(request, 'staff_template/add_case_template.html', context )
-        # print(hospital)
-        # return hospital
-    # print(hospital)
-    # print(status)
     context = {"status_": status,"services" : service, "projects" : project, "users" : user, "hospitals":hospital , "subgroups" : subgroup}
-    print(context)
     return render(request, 'staff_template/add_case_template.html', context)
 
 def case_save(request):
