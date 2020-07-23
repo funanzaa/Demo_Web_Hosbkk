@@ -1,0 +1,23 @@
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %}
+Add Case
+{% endblock page_title %}
+{% block main_content %}
+<section class="content">
+  <div class="container-fluid">
+    <form role="form" action="/find_hosp_add" method="POST">
+      {% csrf_token %}
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group input-group">
+            <input type="text" name="code_lable" class="form-control" placeholder="Account Name & Hcode" required>
+            <span class="input-group-append">
+              <button type="submit" class="btn btn-info btn-flat">Search!</button>
+            </span>
+          </div>
+     </form>
+        </div>
+        {% include 'staff_template/model.html' with user=user id=id%}
+      </div>
+</section>
+{% endblock main_content %}

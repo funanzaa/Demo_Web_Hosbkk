@@ -1,24 +1,4 @@
-<!-- Modal -->
-<div class="modal fade" id="search_hop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Search Hospaital </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
                 <div class="form-group">
-                    <div class="input-group input-group">
-                        <input type="text" class="form-control" placeholder="Account Name" id="ins_name">
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-info btn-flat btn-insert-data">
-                                Search!
-                            </button>
-                        </span>
-                    </div>
                     <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
@@ -29,9 +9,14 @@
                         {% for hosp in hospitals %}
                         <tbody>
                             <tr>
-                                <td>{{ hosp.code }}</td>
-                                <td>{{ hosp.label }}</td>
-                            </tr>
+                                <td>{{hosp.code}}</td>
+                                <td>{{hosp.label}}</td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-danger btn-sm" href="add_case/{{hosp.id}}">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Add
+                                    </a>
                         </tbody>
                         {% endfor %}
                     </table>
@@ -40,7 +25,3 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>

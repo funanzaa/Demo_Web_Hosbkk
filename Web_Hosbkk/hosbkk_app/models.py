@@ -52,7 +52,6 @@ class Case(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     assigned_user = models.CharField(max_length=255)
     status = models.ForeignKey(Status, on_delete=models.DO_NOTHING)
-    description = models.TextField()
     resolution = models.TextField()
     service = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
     hospitals = models.ForeignKey(Hospitals, on_delete=models.DO_NOTHING)

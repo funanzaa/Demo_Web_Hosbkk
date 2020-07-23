@@ -10,5 +10,8 @@ urlpatterns = [
     path('staff_home', staff_home, name= 'staff_home'),
     path('staff_add_case', staff_add_case, name= 'staff_add_case'),
     path('case_save', case_save, name= 'case_save'),
-    path('search_hosp', search_hosp, name ='search_hosp'),
+    path('form_find_hosp', form_find_hosp, name ='form_find_hosp'),
+    path('find_hosp_add', find_hosp_add, name ='find_hosp_add'),
+    path('add_case/<str:hosp_id>', add_case, name="add_case"),
+    
 ]
