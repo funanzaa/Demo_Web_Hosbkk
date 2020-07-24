@@ -48,17 +48,19 @@ def staff_home(request):
         if form.is_valid():
 
             print("VALIDATION SUCCESS")
-            print("NAME " + form.cleaned_data['text_find'])
+            name = form.cleaned_data['text_find']
+            case = Case.objects.filter(name__icontains=name)
+            print(case)
     
 
-    
+
     current_user = request.user.id
     sum_cases = Case.objects.filter(created_by_id=current_user).count()
     new_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=2).count()
     penging_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=4).count()
     close_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=3).count()
     all_cases = Case.objects.filter(created_by_id=current_user).order_by('-id')[:10] 
-    context = {"form": form,"all_case" :all_cases,"sum_case":sum_cases,"new_case": new_cases,"penging_case": penging_cases,"close_case":close_cases}
+    context = {"form": form,"all_case" :all_cases,"sum_case":sum_cases,"new_case": new_cases,"penging_case": penging_cases,"close_case":close_cases,'check': 'data_home'}
     return render(request, 'staff_template/staff_home_template.html', context)
 
 # @csrf_exempt #  we don't need to Pass csrf_token

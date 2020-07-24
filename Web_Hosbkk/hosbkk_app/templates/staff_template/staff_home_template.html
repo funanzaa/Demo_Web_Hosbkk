@@ -3,6 +3,7 @@
 Dashboard
 {% endblock page_title %}
 {% block main_content %}
+
 <section class="content">
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
@@ -104,6 +105,8 @@ Dashboard
                     <i class="fas fa-times"></i></button>
                 </div>
               </div>
+              <!-- check find data home -->
+              {% if check == 'data_home' %}
               <div class="card-body p-0">
                 <table class="table table-striped projects">
                   <thead>
@@ -186,6 +189,7 @@ Dashboard
                   </tbody>
                 </table>
               </div>
+              {% endif %}
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
