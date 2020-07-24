@@ -13,5 +13,6 @@ urlpatterns = [
     path('form_find_hosp', form_find_hosp, name ='form_find_hosp'),
     path('find_hosp_add', find_hosp_add, name ='find_hosp_add'),
     path('add_case/<str:hosp_id>', add_case, name="add_case"),
-    
+    path('edit_case/<str:pk_case>', edit_case, name="edit_case"),
+    # path('form_find_case_home', form_find_case_home, name="form_find_case_home"),
 ]

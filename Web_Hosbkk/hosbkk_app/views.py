@@ -39,17 +39,29 @@ def doLogin(request):
 
 @login_required
 def staff_home(request):
+    
+    form = Form_Find_Hosp()
 
+    if request.method == 'POST':
+        form = Form_Find_Hosp(request.POST)
+
+        if form.is_valid():
+
+            print("VALIDATION SUCCESS")
+            print("NAME " + form.cleaned_data['text_find'])
+    
+
+    
     current_user = request.user.id
     sum_cases = Case.objects.filter(created_by_id=current_user).count()
     new_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=2).count()
     penging_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=4).count()
     close_cases = Case.objects.filter(created_by_id=current_user).filter(status_id=3).count()
     all_cases = Case.objects.filter(created_by_id=current_user).order_by('-id')[:10] 
-    context = {"all_case" :all_cases,"sum_case":sum_cases,"new_case": new_cases,"penging_case": penging_cases,"close_case":close_cases}
+    context = {"form": form,"all_case" :all_cases,"sum_case":sum_cases,"new_case": new_cases,"penging_case": penging_cases,"close_case":close_cases}
     return render(request, 'staff_template/staff_home_template.html', context)
 
-@csrf_exempt #  we don't need to Pass csrf_token
+# @csrf_exempt #  we don't need to Pass csrf_token
 @login_required
 def staff_add_case(request):
 
@@ -142,7 +154,7 @@ def find_hosp_add(request):
 def add_case(request, hosp_id):
 
     current_user = request.user.id
-    print(current_user)
+    # print(current_user)
     # user  = User.objects.filter(~Q(id = current_user)&~Q(username = "admin")) # not equal user and admin
     user  = User.objects.filter(~Q(username = "admin"))
     print(user)
@@ -154,3 +166,17 @@ def add_case(request, hosp_id):
     context = {"status_": status,"services" : service, "projects" : project, "users" : user, "hospitals":hospital , "subgroups" : subgroup}
 
     return render(request, 'staff_template/add_case_template.html', context)
+
+
+def edit_case(request,pk_case):
+    current_user = request.user.id
+    case = Case.objects.filter(id=pk_case)
+    project = Project.objects.all()
+    context = {"case":case,"user":current_user,"projects" : project}
+    print(context)
+    return render(request, 'staff_template/edit_case_template.html',context)
+
+# def form_find_case_home(request):
+#     form = Form_Find_Hosp()
+#     print("test")
+#     return render(request,'staff_template/staff_home_template.html', {'form':form})

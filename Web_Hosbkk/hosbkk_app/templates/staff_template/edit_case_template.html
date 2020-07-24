@@ -1,0 +1,95 @@
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %}
+{{ case.id }} {{ cases.name}}
+{% endblock page_title %}
+{% block main_content %}
+<section class="content">
+{% for cases in case %}
+  <form role="form" action="" method="POST">
+    {% csrf_token %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputName"> Program Name </label>
+                <select type="submit" class="form-control custom-select" name="project" >
+                {% for project in projects %}
+                  {% if cases.project_id  == project.id %}
+                      <option value="{{ cases.project_id }}"> {{ cases.project.name }}</option>
+                  {% elif cases.project_id  != project.id  %}
+                      <option value="{{ project.id }}"> {{ project.name }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputName"> เรื่อง </label>
+                <input type="text" class="form-control" required name="case_name" value="{{ cases.name }}">
+                <!-- hidden staff.admin.id -->
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+              </div>
+              <div class="form-group">
+                <label>Resolution:</label>
+                <textarea name="case_res" class="form-control" rows="4" >{{ cases.resolution }}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-secondary">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputEstimatedBudget">Assigned to: </label>
+                <select class="form-control custom-select" name="assigned_user_id">
+                  {% comment %} {% for user in users %} {% endcomment %}
+                  <option value="{{ user.id }}"> {{ cases.assigned_user }}</option>
+                  {% comment %} {% endfor %} {% endcomment %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget">ช่องทางติดต่อ: </label>
+                <select class="form-control custom-select" name="service">
+                  {% comment %} {% for service in services %} {% endcomment %}
+                  <option value="{{ service.id }}"> {{ cases.service.name }} </option>
+                  {% comment %} {% endfor %} {% endcomment %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget"> Subgroup : </label>
+                <select class="form-control custom-select" name="subgroup">
+                  {% comment %} {% for subgroup in subgroups %} {% endcomment %}
+                  <option value="{{ subgroup.id }}">{{ cases.project_subgroup.name }} </option>
+                  {% comment %} {% endfor %} {% endcomment %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Status :</label>
+                <select class="form-control custom-select" name="status">
+                  {% comment %} {% for status in status_ %} {% endcomment %}
+                  <option value="{{ status.id }}">{{ cases.status.name }} </option>
+                  {% comment %} {% endfor %} {% endcomment %}
+                </select>
+              </div>
+              {% for hospital in hospitals %}
+              <input type="hidden" name="hospital_pk" value="{{ hospital.id }}">
+              {%  endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <a href="#" class="btn btn-secondary">Cancel</a>
+         <input type="submit" value="Save" class="btn btn-success float-right">
+      </div>
+    </div>
+
+    </div>
+    </div>
+  </form>
+{% endfor %}
+</section>
+{% endblock main_content %}

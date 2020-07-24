@@ -18,8 +18,10 @@ from hosbkk_app.models import *
 #     resolution = forms.CharField(widget=forms.Textarea)
 #     status = forms.CharField()
  
-class Form_Find_Hosp(forms.ModelForm):
-    name = forms.CharField(label="Email", max_length=50)
+class Form_Find_Hosp(forms.Form):
+        text_find = forms.CharField(label=False,widget=forms.TextInput(attrs={"class":"form-control float-right",
+                                                                    'placeholder': 'Search'
+                                                                    }))
 
-
-    
+# class Form_Find_Hosp(forms.ModelForm):
+#     class Meta:
